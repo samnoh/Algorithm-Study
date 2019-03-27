@@ -7,38 +7,46 @@ Worst: O(n^2)
 Not stable
 */
 
-function quick_sort (arr) {
-	let quick_sort_util = (arr, start, end) => {
-		let part = partition(arr, start, end);
-        
-		if (start < part - 1) quick_sort_util(arr, start, part - 1); // smaller part
-		if (part < end) quick_sort_util(arr, part, end); // bigger part
-	};
-    
-	let partition = (arr, start, end) => {
-		let pivot = arr[(start + end) / 2];
-        
+function quicksort(arr) {
+	const partition = (arr, start, end) => {
+		const pivot = arr[Math.floor((start + end) / 2)];
+
 		while (start <= end) {
-			while (arr[start] < pivot) start ++;
-			while (arr[end] > pivot) end --;
-            
+			while (arr[start] < pivot) {
+				start += 1;
+			}
+			while (arr[end] > pivot) {
+				end -= 1;
+			}
+
 			if (start <= end) {
-				let temp = arr[start];
+				const temp = arr[start];
 				arr[start] = arr[end];
 				arr[end] = temp; // swap done
-                
-				start ++; // move on
-				end --;
+
+				start += 1; // move on
+				end -= 1;
 			}
 		}
-		
+
 		return start;
 	};
 
-	quick_sort_util(arr, 0, arr.length - 1);
+	const quicksortUtil = (arr, start, end) => {
+		let part = partition(arr, start, end);
+
+		if (start < part - 1) {
+			quicksortUtil(arr, start, part - 1); // smaller part
+		}
+		if (part < end) {
+			quicksortUtil(arr, part, end); // bigger part
+		}
+	};
+
+	quicksortUtil(arr, 0, arr.length - 1);
 	return arr;
 }
 
 
 let list = [3, 9, 4, 7, 5, 0, 1, 6, 8, 2];
-console.log(quick_sort(list)); // [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+console.log(quicksort(list)); // [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
