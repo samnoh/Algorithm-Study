@@ -6,7 +6,7 @@ Best, Average, Worst: O(nlogn)
 Not stable
 */
 
-function heapSort(arr) {
+function heapsort(arr) {
 	const swap = (arr, index1, index2) => {
 		let temp = arr[index1];
 		arr[index1] = arr[index2];
@@ -45,4 +45,4 @@ function heapSort(arr) {
 }
 
 const arr = [3, 0, 2, 5, -1, 4, 1];
-console.log(heapSort(arr)); // [ -1, 0, 1, 2, 3, 4, 5 ]
+console.log(heapsort(arr)); // [ -1, 0, 1, 2, 3, 4, 5 ]
