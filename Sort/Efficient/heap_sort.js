@@ -22,6 +22,7 @@ function heapsort(arr) {
 		if (right_child < arr_length && arr[max] < arr[right_child]) {
 			max = right_child;
 		}
+
 		if (max != parent) { // if one of child numbers is greater than parent
 			swap(arr, parent, max);
 			heap_root(arr, max); // until in order
@@ -33,11 +34,16 @@ function heapsort(arr) {
 	for (let i = Math.floor(arr_length / 2); i >= 0; i--) {
 		heap_root(arr, i);
 	}
+	// [ 5, 3, 4, 0, -1, 2, 1 ]
+	/* 
+			5
+		3		4
+	0	-1		2	1
+	*/
 
-
-	for (let i = arr_length - 1; i > 0; i--) { // let largest numbers go to the last index
-		swap(arr, 0, i);
-		arr_length -= 1;
+	for (let i = arr_length - 1; i > 0; i--) { // let largest numbers go to the last index (down heap)
+		swap(arr, 0, i); // max number goes to the index (i) and index -= 1 every time
+		arr_length -= 1; // no count for last largest numbers
 		heap_root(arr, 0);
 	}
 
